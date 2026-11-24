@@ -61,11 +61,15 @@ def parse_line(raw: str) -> Tuple[str, str, List[str]] | None:
     line = raw.strip()
     if not line or line.startswith("#") or line.startswith(";") or line.startswith("//"):
         return None
+    if line in ("payload:", "rules:", "rule-providers:"):
+        return None
     # 去掉行内注释
     if " #" in line:
         line = line.split(" #", 1)[0].strip()
     if line.startswith("- "):
         line = line[2:].strip().strip('"').strip("'")
+    else:
+        line = line.strip('"').strip("'")
 
     # 1. Classical 格式（含逗号）
     if "," in line:
@@ -274,9 +278,10 @@ def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, int]]) ->
         gname = grp["name"]
         mrs_gs = grp.get("mrs_geosite") or []
         mrs_gi = grp.get("mrs_geoip") or []
+        mrs_extra = grp.get("mrs_extra_urls") or []
 
         # 私有/自定义规则（或无 .mrs 对应的组）使用本仓库清洗后的 .list
-        if grp.get("custom_key") or (not mrs_gs and not mrs_gi):
+        if grp.get("custom_key") or (not mrs_gs and not mrs_gi and not mrs_extra):
             pname = f"own_{gid}"
             providers[pname] = {
                 "type": "http",
@@ -286,6 +291,19 @@ def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, int]]) ->
                 "path": f"./rule_provider/{pname}.list",
                 "interval": 86400,
             }
+            rules.append(f"RULE-SET,{pname},{gname}")
+
+        for extra in mrs_extra:
+            pname = extra["name"]
+            if pname not in providers:
+                providers[pname] = {
+                    "type": "http",
+                    "behavior": extra.get("behavior", "domain"),
+                    "format": "mrs",
+                    "url": extra["url"],
+                    "path": f"./rule_provider/{pname}.mrs",
+                    "interval": 86400,
+                }
             rules.append(f"RULE-SET,{pname},{gname}")
 
         for gs in mrs_gs:
