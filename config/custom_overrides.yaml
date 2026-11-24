@@ -1,0 +1,125 @@
+# 个人私有规则与动态覆盖（拥有最高优先级，永远不会被社区规则覆盖）
+# 任何时候想临时强制某个域名直连或代理，直接改此文件推送即可
+
+custom_rules:
+  lan_private:
+    # 局域网与 Tailscale 异地组网网段强制直连
+    - IP-CIDR,192.168.34.0/24,no-resolve
+    - IP-CIDR,100.64.0.0/10,no-resolve
+    - DOMAIN-SUFFIX,lan
+    - DOMAIN-SUFFIX,local
+    - DOMAIN-SUFFIX,home.arpa
+
+  private_direct:
+    # 个人自建服务与私有域名（直连）
+    - DOMAIN-SUFFIX,1998411.xyz
+    - DOMAIN-SUFFIX,myprivatehost.top
+    - DOMAIN-SUFFIX,myprivatevideo.store
+    - IP-CIDR,66.103.222.163/32,no-resolve
+    - IP-CIDR,142.171.43.21/32,no-resolve
+    - IP-CIDR,45.207.211.101/32,no-resolve
+    - IP-CIDR,74.48.81.236/32,no-resolve
+    # 国内加密 DoH / 公共 DNS 强制直连（防任何情况绕道海外）
+    - DOMAIN,doh.pub
+    - DOMAIN,dns.alidns.com
+    - IP-CIDR,223.5.5.5/32,no-resolve
+    - IP-CIDR,223.6.6.6/32,no-resolve
+    - IP-CIDR,1.12.12.12/32,no-resolve
+    - IP-CIDR,119.29.29.29/32,no-resolve
+    - IP-CIDR,120.196.165.24/32,no-resolve
+    - IP-CIDR,211.136.192.6/32,no-resolve
+
+  dynamic_direct:
+    # 临时强制直连域名可随时加在这里
+    - DOMAIN-SUFFIX,deepseek.com
+    - DOMAIN,cn.bing.com
+    - DOMAIN,ocsp.apple.com
+
+  ai_copilot_extra:
+    - DOMAIN-SUFFIX,copilot.microsoft.com
+    - DOMAIN-SUFFIX,copilot.cloud.microsoft
+    - DOMAIN,sydney.bing.com
+    - DOMAIN,edgeservices.bing.com
+
+  dynamic_proxy:
+    # 临时强制代理域名（如 PikPak / 特定海外高校或个人站点）
+    - DOMAIN-SUFFIX,mypikpak.com
+    - DOMAIN-SUFFIX,pikpakdrive.com
+    - DOMAIN-SUFFIX,psu.edu
+
+  foreign_dns:
+    # 海外公共 DNS（IPv4 + IPv6 + 域名），统一走 ☎️ 国外-DNS 组，杜绝漏网或 DNS 泄漏
+    - DOMAIN,dns.google
+    - DOMAIN,dns64.dns.google
+    - DOMAIN,cloudflare-dns.com
+    - DOMAIN,one.one.one.one
+    - DOMAIN,1dot1dot1dot1.cloudflare-dns.com
+    - DOMAIN,dns.quad9.net
+    - DOMAIN,dns10.quad9.net
+    - DOMAIN,doh.opendns.com
+    - DOMAIN,dns.adguard-dns.com
+    - DOMAIN,doh.sb
+    - DOMAIN,doh.dns.sb
+    - DOMAIN,doh.mullvad.net
+    - IP-CIDR,1.1.1.1/32,no-resolve
+    - IP-CIDR,1.0.0.1/32,no-resolve
+    - IP-CIDR,8.8.8.8/32,no-resolve
+    - IP-CIDR,8.8.4.4/32,no-resolve
+    - IP-CIDR,9.9.9.9/32,no-resolve
+    - IP-CIDR,9.9.9.10/32,no-resolve
+    - IP-CIDR,149.112.112.112/32,no-resolve
+    - IP-CIDR,149.112.112.10/32,no-resolve
+    - IP-CIDR,94.140.14.14/32,no-resolve
+    - IP-CIDR,94.140.15.15/32,no-resolve
+    - IP-CIDR,94.140.14.140/32,no-resolve
+    - IP-CIDR,94.140.14.141/32,no-resolve
+    - IP-CIDR,208.67.222.222/32,no-resolve
+    - IP-CIDR,208.67.220.220/32,no-resolve
+    - IP-CIDR6,2606:4700:4700::1111/128,no-resolve
+    - IP-CIDR6,2606:4700:4700::1001/128,no-resolve
+    - IP-CIDR6,2001:4860:4860::8888/128,no-resolve
+    - IP-CIDR6,2001:4860:4860::8844/128,no-resolve
+
+  cn_media_extra:
+    # 沿用原 rule_governance.yaml 中沉淀的国内媒体/抖音/B站精准域名
+    - DOMAIN,vv.video.qq.com
+    - DOMAIN,disp-qryapi.3g.qq.com
+    - DOMAIN,s1.hdslb.com.w.kunlunar.com
+    - DOMAIN,bsg.w.bilicdn1.com
+    - DOMAIN,data.bilicdn2.com
+    - DOMAIN-SUFFIX,snssdk.com
+    - DOMAIN-SUFFIX,pstatp.com
+    - DOMAIN-SUFFIX,amemv.com
+    - DOMAIN-SUFFIX,douyincdn.com
+    - DOMAIN-SUFFIX,douyinpic.com
+    - DOMAIN-SUFFIX,douyinstatic.com
+    - DOMAIN-SUFFIX,douyinvod.com
+    - DOMAIN-SUFFIX,idouyinvod.com
+
+  apple_extra:
+    - DOMAIN,account.apple.com
+    - DOMAIN-SUFFIX,push.apple.com
+
+  microsoft_extra:
+    - DOMAIN-SUFFIX,clarity.ms
+    - DOMAIN-SUFFIX,officeclient.microsoft.com
+    - DOMAIN-SUFFIX,g.live.com
+    - DOMAIN-SUFFIX,wns.windows.com
+
+  google_voice_exact:
+    # 精准 Google Voice 域名（绝不再错误包含整个 googleapis.com！）
+    - DOMAIN-SUFFIX,voice.google.com
+    - DOMAIN,lens.l.google.com
+    - DOMAIN-SUFFIX,clients6.google.com
+    - DOMAIN-SUFFIX,voice.telephony.goog
+
+# 全局黑名单：从社区上游中剔除已知有害/过宽/误杀的规则
+global_drop_rules:
+  # 绝不允许 akadns.net 全局根域被苹果直连吞掉（会杀死苹果 OTA 拦截且误伤 Akamai 海外 CDN）
+  - DOMAIN-SUFFIX,akadns.net
+  # 绝不允许全量 googleapis.com 被 GV 组吞掉（会杀死 Gemini API / Firebase / Android API）
+  # 绝不允许在 CN 规则中混入海外高校 .edu 与国际学术库
+  - DOMAIN-SUFFIX,edu
+  - DOMAIN-SUFFIX,acm.org
+  - DOMAIN-SUFFIX,ieee.org
+  - DOMAIN-SUFFIX,dblp.org
