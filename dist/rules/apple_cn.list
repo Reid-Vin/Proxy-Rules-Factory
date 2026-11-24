@@ -1,6 +1,6 @@
 # Group: 🍎 苹果直连 (apple_cn)
 # Updated: 2026-11-24 07:24 UTC
-# Rules: 151 (raw=167, local_dup=2, cross_conflict=10, parent_shadow=4)
+# Rules: 150 (raw=167, local_dup=2, cross_conflict=11, parent_shadow=4)
 
 DOMAIN,a1.mzstatic.com
 DOMAIN,a2.mzstatic.com
@@ -78,7 +78,6 @@ DOMAIN,gspe79-cn-ssl.ls.apple.com
 DOMAIN,guzzoni-apple-com.v.aaplimg.com
 DOMAIN,guzzoni.apple.com
 DOMAIN,guzzoni.smoot.apple.com
-DOMAIN,iadsdk.apple.com
 DOMAIN,images.apple.com.edgekey.net.globalredir.akadns.net
 DOMAIN,init-kt.apple.com
 DOMAIN,init-p01md-lb.push-apple.com.akadns.net

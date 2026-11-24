@@ -1,8 +1,7 @@
 # Group: 📶 网络测速 (speedtest)
 # Updated: 2026-11-24 07:24 UTC
-# Rules: 20 (raw=20, local_dup=0, cross_conflict=0, parent_shadow=0)
+# Rules: 19 (raw=20, local_dup=0, cross_conflict=0, parent_shadow=1)
 
-DOMAIN,www.speedtest.net.cdn.cloudflare.net
 DOMAIN-SUFFIX,cdnst.net
 DOMAIN-SUFFIX,cellmaps.com
 DOMAIN-SUFFIX,ekahau.cloud

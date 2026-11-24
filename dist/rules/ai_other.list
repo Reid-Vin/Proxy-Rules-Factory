@@ -1,19 +1,21 @@
 # Group: 🤖 Claude & AI (ai_other)
 # Updated: 2026-11-24 07:24 UTC
-# Rules: 145 (raw=255, local_dup=36, cross_conflict=74, parent_shadow=0)
+# Rules: 147 (raw=480, local_dup=251, cross_conflict=78, parent_shadow=4)
 
+DOMAIN,api.together.xyz
 DOMAIN,copilot-proxy.githubusercontent.com
 DOMAIN,copilot-telemetry-service.githubusercontent.com
 DOMAIN,copilot-telemetry.githubusercontent.com
 DOMAIN,copilot-workspace.githubnext.com
 DOMAIN,copilotprodattachments.blob.core.windows.net
 DOMAIN,http-intake.logs.us5.datadoghq.com
-DOMAIN,o1158394.ingest.us.sentry.io
 DOMAIN,ppl-ai-file-upload.s3.amazonaws.com
 DOMAIN,pplx-res.cloudinary.com
 DOMAIN,production-copilot-host-westus.webpubsub.azure.com
 DOMAIN,servd-anthropic-website.b-cdn.net
+DOMAIN,sydney.bing.com
 DOMAIN-SUFFIX,agentclientprotocol.com
+DOMAIN-SUFFIX,ai.azure.com
 DOMAIN-SUFFIX,ant.dev
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,anthropic.team

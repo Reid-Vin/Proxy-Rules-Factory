@@ -1,6 +1,6 @@
 # Group: 🔎 谷歌服务 (google)
 # Updated: 2026-11-24 07:24 UTC
-# Rules: 687 (raw=1079, local_dup=201, cross_conflict=191, parent_shadow=0)
+# Rules: 657 (raw=1079, local_dup=102, cross_conflict=320, parent_shadow=0)
 
 DOMAIN,apps5.oingo.com
 DOMAIN,avail.googleflights.net
@@ -54,9 +54,6 @@ DOMAIN-SUFFIX,advertiserscommunity.com
 DOMAIN-SUFFIX,adwords-community.com
 DOMAIN-SUFFIX,adwords.com
 DOMAIN-SUFFIX,adwordsexpress.com
-DOMAIN-SUFFIX,android
-DOMAIN-SUFFIX,android.com
-DOMAIN-SUFFIX,androidify.com
 DOMAIN-SUFFIX,angulardart.org
 DOMAIN-SUFFIX,api.ai
 DOMAIN-SUFFIX,apigee.com
@@ -187,13 +184,9 @@ DOMAIN-SUFFIX,cookiechoices.org
 DOMAIN-SUFFIX,coova.com
 DOMAIN-SUFFIX,coova.net
 DOMAIN-SUFFIX,coova.org
-DOMAIN-SUFFIX,crashlytics.com
 DOMAIN-SUFFIX,crossmediapanel.com
 DOMAIN-SUFFIX,crr.com
 DOMAIN-SUFFIX,cs4hs.com
-DOMAIN-SUFFIX,dart.dev
-DOMAIN-SUFFIX,dartlang.org
-DOMAIN-SUFFIX,dartpad.dev
 DOMAIN-SUFFIX,dartsearch.net
 DOMAIN-SUFFIX,dataliberation.org
 DOMAIN-SUFFIX,dclk
@@ -210,19 +203,10 @@ DOMAIN-SUFFIX,doubleclick.cn
 DOMAIN-SUFFIX,doubleclick.com
 DOMAIN-SUFFIX,doubleclick.net
 DOMAIN-SUFFIX,episodic.com
-DOMAIN-SUFFIX,fastlane.ci
-DOMAIN-SUFFIX,fastlane.tools
 DOMAIN-SUFFIX,feedburner.com
 DOMAIN-SUFFIX,fflick.com
 DOMAIN-SUFFIX,financeleadsonline.com
-DOMAIN-SUFFIX,firebase.com
-DOMAIN-SUFFIX,firebase.dev
-DOMAIN-SUFFIX,firebase.io
-DOMAIN-SUFFIX,firebaseapp.com
-DOMAIN-SUFFIX,firebaseio.com
 DOMAIN-SUFFIX,fitbit.com
-DOMAIN-SUFFIX,flutter.dev
-DOMAIN-SUFFIX,flutterapp.com
 DOMAIN-SUFFIX,foofle.com
 DOMAIN-SUFFIX,froogle.com
 DOMAIN-SUFFIX,fuchsia.dev
@@ -233,7 +217,6 @@ DOMAIN-SUFFIX,g.dev
 DOMAIN-SUFFIX,g.page
 DOMAIN-SUFFIX,gateway.dev
 DOMAIN-SUFFIX,gbiz
-DOMAIN-SUFFIX,gcr.io
 DOMAIN-SUFFIX,gerritcodereview.com
 DOMAIN-SUFFIX,get.app
 DOMAIN-SUFFIX,get.dev
@@ -250,16 +233,8 @@ DOMAIN-SUFFIX,globaledu.org
 DOMAIN-SUFFIX,gmail
 DOMAIN-SUFFIX,gmail.com
 DOMAIN-SUFFIX,gmodules.com
-DOMAIN-SUFFIX,go-lang.com
-DOMAIN-SUFFIX,go-lang.net
-DOMAIN-SUFFIX,go-lang.org
-DOMAIN-SUFFIX,go.dev
-DOMAIN-SUFFIX,godoc.org
 DOMAIN-SUFFIX,gogle.com
 DOMAIN-SUFFIX,gogole.com
-DOMAIN-SUFFIX,golang.com
-DOMAIN-SUFFIX,golang.net
-DOMAIN-SUFFIX,golang.org
 DOMAIN-SUFFIX,gonglchuangl.net
 DOMAIN-SUFFIX,goo.gl
 DOMAIN-SUFFIX,goog
@@ -601,13 +576,10 @@ DOMAIN-SUFFIX,picasaweb.org
 DOMAIN-SUFFIX,picnik.com
 DOMAIN-SUFFIX,pittpatt.com
 DOMAIN-SUFFIX,pixate.com
-DOMAIN-SUFFIX,polymer-project.org
-DOMAIN-SUFFIX,polymerproject.org
 DOMAIN-SUFFIX,postini.com
 DOMAIN-SUFFIX,privacysandbox.com
 DOMAIN-SUFFIX,projectara.com
 DOMAIN-SUFFIX,projectbaseline.com
-DOMAIN-SUFFIX,pub.dev
 DOMAIN-SUFFIX,publishproxy.com
 DOMAIN-SUFFIX,questvisual.com
 DOMAIN-SUFFIX,quickoffice.com
@@ -650,8 +622,6 @@ DOMAIN-SUFFIX,urchin.com
 DOMAIN-SUFFIX,useplannr.com
 DOMAIN-SUFFIX,usvimosquito.com
 DOMAIN-SUFFIX,usvimosquitoproject.com
-DOMAIN-SUFFIX,v8.dev
-DOMAIN-SUFFIX,v8project.org
 DOMAIN-SUFFIX,velostrata.com
 DOMAIN-SUFFIX,verilylifesciences.com
 DOMAIN-SUFFIX,verilystudyhub.com
