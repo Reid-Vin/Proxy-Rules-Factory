@@ -1,0 +1,391 @@
+# Mihomo 原生 .mrs 二进制规则集模板 (Generated: 2026-11-24 07:04 UTC)
+# 规则每 24 小时由 Mihomo 内核自动从 MetaCubeX/meta-rules-dat 与本仓库热更新，无需重新转换订阅。
+# 可直接用于 Clash Verge Rev / Mihomo Party / OpenClash 覆写脚本。
+
+rule-providers:
+  own_lan:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/lan.list
+    path: ./rule_provider/own_lan.list
+    interval: 86400
+  mrs_gs_private:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+    path: ./rule_provider/mrs_gs_private.mrs
+    interval: 86400
+  mrs_gi_private:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
+    path: ./rule_provider/mrs_gi_private.mrs
+    interval: 86400
+  own_private_direct:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/private_direct.list
+    path: ./rule_provider/own_private_direct.list
+    interval: 86400
+  own_dynamic_direct:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/dynamic_direct.list
+    path: ./rule_provider/own_dynamic_direct.list
+    interval: 86400
+  own_dynamic_proxy:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/dynamic_proxy.list
+    path: ./rule_provider/own_dynamic_proxy.list
+    interval: 86400
+  own_foreign_dns:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/foreign_dns.list
+    path: ./rule_provider/own_foreign_dns.list
+    interval: 86400
+  own_apple_ota:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/apple_ota.list
+    path: ./rule_provider/own_apple_ota.list
+    interval: 86400
+  mrs_gs_openai:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs
+    path: ./rule_provider/mrs_gs_openai.mrs
+    interval: 86400
+  mrs_gs_google-gemini:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-gemini.mrs
+    path: ./rule_provider/mrs_gs_google-gemini.mrs
+    interval: 86400
+  mrs_gs_anthropic:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/anthropic.mrs
+    path: ./rule_provider/mrs_gs_anthropic.mrs
+    interval: 86400
+  mrs_gs_xai:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/xai.mrs
+    path: ./rule_provider/mrs_gs_xai.mrs
+    interval: 86400
+  mrs_gs_perplexity:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/perplexity.mrs
+    path: ./rule_provider/mrs_gs_perplexity.mrs
+    interval: 86400
+  mrs_gs_cursor:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cursor.mrs
+    path: ./rule_provider/mrs_gs_cursor.mrs
+    interval: 86400
+  mrs_gs_category-ai-not_cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs
+    path: ./rule_provider/mrs_gs_category-ai-not_cn.mrs
+    interval: 86400
+  own_ai_copilot:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/ai_copilot.list
+    path: ./rule_provider/own_ai_copilot.list
+    interval: 86400
+  mrs_gs_bing:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bing.mrs
+    path: ./rule_provider/mrs_gs_bing.mrs
+    interval: 86400
+  own_google_voice:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/google_voice.list
+    path: ./rule_provider/own_google_voice.list
+    interval: 86400
+  mrs_gs_youtube:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
+    path: ./rule_provider/mrs_gs_youtube.mrs
+    interval: 86400
+  mrs_gs_netflix:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
+    path: ./rule_provider/mrs_gs_netflix.mrs
+    interval: 86400
+  mrs_gi_netflix:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
+    path: ./rule_provider/mrs_gi_netflix.mrs
+    interval: 86400
+  mrs_gs_tiktok:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
+    path: ./rule_provider/mrs_gs_tiktok.mrs
+    interval: 86400
+  mrs_gs_bahamut:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs
+    path: ./rule_provider/mrs_gs_bahamut.mrs
+    interval: 86400
+  mrs_gs_telegram:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+    path: ./rule_provider/mrs_gs_telegram.mrs
+    interval: 86400
+  mrs_gi_telegram:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
+    path: ./rule_provider/mrs_gi_telegram.mrs
+    interval: 86400
+  mrs_gs_twitter:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs
+    path: ./rule_provider/mrs_gs_twitter.mrs
+    interval: 86400
+  mrs_gs_category-cryptocurrency:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-cryptocurrency.mrs
+    path: ./rule_provider/mrs_gs_category-cryptocurrency.mrs
+    interval: 86400
+  mrs_gs_github:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
+    path: ./rule_provider/mrs_gs_github.mrs
+    interval: 86400
+  mrs_gs_google:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    path: ./rule_provider/mrs_gs_google.mrs
+    interval: 86400
+  own_apple_cn:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/apple_cn.list
+    path: ./rule_provider/own_apple_cn.list
+    interval: 86400
+  mrs_gs_apple-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs
+    path: ./rule_provider/mrs_gs_apple-cn.mrs
+    interval: 86400
+  mrs_gs_apple:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
+    path: ./rule_provider/mrs_gs_apple.mrs
+    interval: 86400
+  own_microsoft_cn:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/microsoft_cn.list
+    path: ./rule_provider/own_microsoft_cn.list
+    interval: 86400
+  mrs_gs_microsoft_at_cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft@cn.mrs
+    path: ./rule_provider/mrs_gs_microsoft_at_cn.mrs
+    interval: 86400
+  mrs_gs_microsoft:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
+    path: ./rule_provider/mrs_gs_microsoft.mrs
+    interval: 86400
+  own_cn_media:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/cn_media.list
+    path: ./rule_provider/own_cn_media.list
+    interval: 86400
+  mrs_gs_bilibili:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs
+    path: ./rule_provider/mrs_gs_bilibili.mrs
+    interval: 86400
+  mrs_gs_bytedance:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bytedance.mrs
+    path: ./rule_provider/mrs_gs_bytedance.mrs
+    interval: 86400
+  mrs_gs_tencent:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tencent.mrs
+    path: ./rule_provider/mrs_gs_tencent.mrs
+    interval: 86400
+  mrs_gs_iqiyi:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/iqiyi.mrs
+    path: ./rule_provider/mrs_gs_iqiyi.mrs
+    interval: 86400
+  mrs_gs_youku:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youku.mrs
+    path: ./rule_provider/mrs_gs_youku.mrs
+    interval: 86400
+  mrs_gs_speedtest:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs
+    path: ./rule_provider/mrs_gs_speedtest.mrs
+    interval: 86400
+  mrs_gs_category-public-tracker:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs
+    path: ./rule_provider/mrs_gs_category-public-tracker.mrs
+    interval: 86400
+  mrs_gs_gfw:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs
+    path: ./rule_provider/mrs_gs_gfw.mrs
+    interval: 86400
+  mrs_gs_category-games_at_cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs
+    path: ./rule_provider/mrs_gs_category-games_at_cn.mrs
+    interval: 86400
+  mrs_gs_steam_at_cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam@cn.mrs
+    path: ./rule_provider/mrs_gs_steam_at_cn.mrs
+    interval: 86400
+  mrs_gs_cn:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: ./rule_provider/mrs_gs_cn.mrs
+    interval: 86400
+  mrs_gi_cn:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
+    path: ./rule_provider/mrs_gi_cn.mrs
+    interval: 86400
+rules:
+- RULE-SET,own_lan,🏠 局域服务
+- RULE-SET,mrs_gs_private,🏠 局域服务
+- RULE-SET,mrs_gi_private,🏠 局域服务,no-resolve
+- RULE-SET,own_private_direct,🤓 私人服务
+- RULE-SET,own_dynamic_direct,🚁 动态直连
+- RULE-SET,own_dynamic_proxy,🚻 动态代理
+- RULE-SET,own_foreign_dns,☎️ 国外-DNS
+- RULE-SET,own_apple_ota,⬆️ 苹果升级
+- RULE-SET,mrs_gs_openai,🤖 OpenAI
+- RULE-SET,mrs_gs_google-gemini,🤖 Gemini
+- RULE-SET,mrs_gs_anthropic,🤖 Claude & AI
+- RULE-SET,mrs_gs_xai,🤖 Claude & AI
+- RULE-SET,mrs_gs_perplexity,🤖 Claude & AI
+- RULE-SET,mrs_gs_cursor,🤖 Claude & AI
+- RULE-SET,mrs_gs_category-ai-not_cn,🤖 Claude & AI
+- RULE-SET,own_ai_copilot,🤖 微软助手
+- RULE-SET,mrs_gs_bing,🤖 微软助手
+- RULE-SET,own_google_voice,📱 GV号服务
+- RULE-SET,mrs_gs_youtube,📹 油管视频
+- RULE-SET,mrs_gs_netflix,🎥 奈飞视频
+- RULE-SET,mrs_gi_netflix,🎥 奈飞视频,no-resolve
+- RULE-SET,mrs_gs_tiktok,🎵 海外抖音
+- RULE-SET,mrs_gs_bahamut,🐉 巴哈姆特
+- RULE-SET,mrs_gs_telegram,📳 电报代理
+- RULE-SET,mrs_gi_telegram,📳 电报代理,no-resolve
+- RULE-SET,mrs_gs_twitter,🕊️ 推特代理
+- RULE-SET,mrs_gs_category-cryptocurrency,🪙 加密货币
+- RULE-SET,mrs_gs_github,🐙 GitHub
+- RULE-SET,mrs_gs_google,🔎 谷歌服务
+- RULE-SET,own_apple_cn,🍎 苹果直连
+- RULE-SET,mrs_gs_apple-cn,🍎 苹果直连
+- RULE-SET,mrs_gs_apple,🍎 苹果服务
+- RULE-SET,own_microsoft_cn,Ⓜ️ 微软直连
+- RULE-SET,mrs_gs_microsoft_at_cn,Ⓜ️ 微软直连
+- RULE-SET,mrs_gs_microsoft,Ⓜ️ 微软服务
+- RULE-SET,own_cn_media,📺 国内媒体
+- RULE-SET,mrs_gs_bilibili,📺 国内媒体
+- RULE-SET,mrs_gs_bytedance,📺 国内媒体
+- RULE-SET,mrs_gs_tencent,📺 国内媒体
+- RULE-SET,mrs_gs_iqiyi,📺 国内媒体
+- RULE-SET,mrs_gs_youku,📺 国内媒体
+- RULE-SET,mrs_gs_speedtest,📶 网络测速
+- RULE-SET,mrs_gs_category-public-tracker,📥 下载服务
+- RULE-SET,mrs_gs_gfw,🧱 防火长城
+- RULE-SET,mrs_gs_category-games_at_cn,🎮 国内游戏
+- RULE-SET,mrs_gs_steam_at_cn,🎮 国内游戏
+- RULE-SET,mrs_gs_cn,🎯 直连服务
+- RULE-SET,mrs_gi_cn,📞 国内IP段
+- MATCH,🐟 漏网之鱼
