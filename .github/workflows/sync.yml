@@ -1,0 +1,42 @@
+name: Scheduled Main Branch Sync
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    # GitHub Actions 定时任务必须在默认分支触发，此处负责每天北京时间 04:00 自动构建隐藏的 main 分支
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PyYAML
+        run: python3 -m pip install --no-cache-dir pyyaml
+
+      - name: Build rules factory on main
+        run: python3 scripts/build_factory.py
+
+      - name: Commit & Push to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/
+          if git diff --cached --quiet; then
+            echo "No rule changes today."
+          else
+            git commit -m "chore(rules): automated daily sync & governance update [skip ci]"
+            git push origin main
+          fi
