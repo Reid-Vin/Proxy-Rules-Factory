@@ -113,11 +113,21 @@ custom_rules:
     - DOMAIN-SUFFIX,clients6.google.com
     - DOMAIN-SUFFIX,voice.telephony.goog
 
+  bili_intl_extra:
+    # 港澳台 / 东南亚 B 站番剧接口（绝不影响大陆 B 站直连）
+    - DOMAIN,api.bilibili.tv
+    - DOMAIN,app.bilibili.tv
+    - DOMAIN-SUFFIX,biliintl.com
+    - DOMAIN-SUFFIX,biliintl.co
+
 # 全局黑名单：从社区上游中剔除已知有害/过宽/误杀的规则
 global_drop_rules:
   # 绝不允许 akadns.net 全局根域被苹果直连吞掉（会杀死苹果 OTA 拦截且误伤 Akamai 海外 CDN）
   - DOMAIN-SUFFIX,akadns.net
-  # 绝不允许全量 googleapis.com 被 GV 组吞掉（会杀死 Gemini API / Firebase / Android API）
+  # 绝不允许 AWS 美西全区被 Netflix.list 吞掉（会误伤大量公有云/Apple/开发服务）
+  - DOMAIN-SUFFIX,us-west-2.amazonaws.com
+  # 绝不允许通用隐私弹窗域被单一流媒体吞掉
+  - DOMAIN-SUFFIX,onetrust.com
   # 绝不允许在 CN 规则中混入海外高校 .edu 与国际学术库
   - DOMAIN-SUFFIX,edu
   - DOMAIN-SUFFIX,acm.org
