@@ -1,14 +1,20 @@
-# 自动化分流规则工厂配置
-# 顺序即优先级！严格遵循：私有保护 -> 强拦截/细分专项(子域) -> 流媒体/高频应用 -> 大型平台(父域) -> 国内外大盘兜底
-# 构建引擎会按此顺序执行【全局跨组去重 + 冲突仲裁】，保证高优先级细分规则绝对不会被低优先级父域覆盖或重复。
+# 自动化分流规则工厂配置（五源强强联合终极版）
+# 融合 5 大日更活跃社区仓库：
+#   1. MetaCubeX/meta-rules-dat      (v2fly + Loyalsoldier + 社区 PR 主干，日更)
+#   2. DustinWin/ruleset_geodata     (实战 AI / Netflix IP / Telegram IP / GFW / PT Trackers，日更)
+#   3. Loyalsoldier/clash-rules      (GFW / Telegram CIDR 精准校对，日更)
+#   4. blackmatrix7/ios_rule_script  (OpenAI 防风控关联域 / Netflix 实测设备域 / Apple OTA / LAN)
+#   5. TG-Twilight/AWAvenue-Ads-Rule (秋风极简零误杀全屋去广告，日更)
+#
+# 顺序即优先级！严格遵循：
+#   私有保护 -> 广告/OTA 拦截 -> 细分专项(AI/流媒体/通信/开发学术) -> 大型平台(父域) -> 国内大厂/媒体 -> GFW -> 国内兜底 -> 全球兜底
 
 repo_owner: Reid-Vin
 repo_name: Proxy-Rules-Factory
 repo_branch: main
 
-# 所有组均对接当前社区最活跃、每日自动构建的 MetaCubeX/meta-rules-dat 上游
-# 以及必要的精选补充源
 groups:
+  # ==================== 第 1 层：私有与底层最高优先级保护 ====================
   - id: lan
     name: "🏠 局域服务"
     default_target: "🎯 直连服务"
@@ -46,19 +52,31 @@ groups:
     custom_key: foreign_dns
     sources: []
 
-  # === 强拦截与细分 AI/专项组（必须全部排在 Apple / Google / Microsoft 父域之前！） ===
+  # ==================== 第 2 层：轻量去广告 & 系统 OTA 强拦截 ====================
+  - id: adblock
+    name: "🛡️ 广告拦截"
+    default_target: "❌ 拒绝请求"
+    mrs_extra_urls:
+      - name: "mrs_awavenue_ads"
+        behavior: "domain"
+        url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
+    sources:
+      - https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical.yaml
+
   - id: apple_ota
     name: "⬆️ 苹果升级"
     default_target: "❌ 拒绝请求"
     sources:
       - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SystemOTA/SystemOTA.list
 
+  # ==================== 第 3 层：高风控 AI 专项（全部在 Google/Microsoft 父域之前） ====================
   - id: ai_openai
     name: "🤖 OpenAI"
     default_target: "☑️ 节点选择"
     mrs_geosite: ["openai"]
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.list
+      - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.list
 
   - id: ai_gemini
     name: "🤖 Gemini"
@@ -77,6 +95,7 @@ groups:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/perplexity.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cursor.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.list
+      - https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ai.list
 
   - id: ai_copilot
     name: "🤖 微软助手"
@@ -86,6 +105,7 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bing.list
 
+  # ==================== 第 4 层：流媒体、通信、社交、加密、开发与学术 ====================
   - id: google_voice
     name: "📱 GV号服务"
     default_target: "🇺🇲 美国节点"
@@ -99,7 +119,6 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list
 
-  # === 高频流媒体与海外社交 ===
   - id: netflix
     name: "🎥 奈飞视频"
     default_target: "☑️ 节点选择"
@@ -108,6 +127,20 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list
+      - https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/netflixip.list
+      - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.list
+
+  - id: intl_media
+    name: "🎬 国际流媒体"
+    default_target: "☑️ 节点选择"
+    mrs_geosite: ["disney", "spotify", "hbo", "primevideo", "twitch", "apple-tvplus"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/hbo.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/primevideo.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitch.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-tvplus.list
 
   - id: tiktok
     name: "🎵 海外抖音"
@@ -123,6 +156,14 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.list
 
+  - id: bili_intl
+    name: "🎦 中站国际"
+    default_target: "☑️ 节点选择"
+    custom_key: bili_intl_extra
+    mrs_geosite: ["bilibili@!cn"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili@!cn.list
+
   - id: telegram
     name: "📳 电报代理"
     default_target: "☑️ 节点选择"
@@ -131,6 +172,8 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list
+      - https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/telegramip.list
+      - https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt
 
   - id: twitter
     name: "🕊️ 推特代理"
@@ -146,21 +189,7 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-cryptocurrency.list
 
-  - id: github
-    name: "🐙 GitHub"
-    default_target: "☑️ 节点选择"
-    mrs_geosite: ["github"]
-    sources:
-      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list
-
-  # === 大型生态平台（父域，严格排在细分专项组之后！） ===
-  - id: google
-    name: "🔎 谷歌服务"
-    default_target: "☑️ 节点选择"
-    mrs_geosite: ["google"]
-    sources:
-      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list
-
+  # === 苹果/微软中国区直连（排在开发与学术之前，防 apple-mapkit 等国内 CDN 被误划代理） ===
   - id: apple_cn
     name: "🍎 苹果直连"
     default_target: "🎯 直连服务"
@@ -168,13 +197,6 @@ groups:
     mrs_geosite: ["apple-cn"]
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.list
-
-  - id: apple
-    name: "🍎 苹果服务"
-    default_target: "🎯 直连服务"
-    mrs_geosite: ["apple"]
-    sources:
-      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list
 
   - id: microsoft_cn
     name: "Ⓜ️ 微软直连"
@@ -184,6 +206,33 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft@cn.list
 
+  - id: dev_scholar
+    name: "💻 开发与学术"
+    default_target: "☑️ 节点选择"
+    mrs_geosite: ["github", "docker", "category-dev", "category-scholar-!cn", "cloudflare", "paypal"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/docker.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-dev.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-scholar-!cn.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.list
+
+  # ==================== 第 5 层：大型生态平台（父域，排在所有细分专项之后） ====================
+  - id: google
+    name: "🔎 谷歌服务"
+    default_target: "☑️ 节点选择"
+    mrs_geosite: ["google"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list
+
+  - id: apple
+    name: "🍎 苹果服务"
+    default_target: "🎯 直连服务"
+    mrs_geosite: ["apple"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list
+
   - id: microsoft
     name: "Ⓜ️ 微软服务"
     default_target: "☑️ 节点选择"
@@ -191,18 +240,45 @@ groups:
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list
 
-  # === 国内媒体 / 测速 / 下载 ===
+  # ==================== 第 6 层：国内高频直达（零解析延迟秒直连） ====================
   - id: cn_media
     name: "📺 国内媒体"
     default_target: "🎯 直连服务"
     custom_key: cn_media_extra
-    mrs_geosite: ["bilibili", "bytedance", "tencent", "iqiyi", "youku"]
+    mrs_geosite: ["bilibili", "bytedance", "tencent", "iqiyi", "youku", "douyu", "kuaishou", "ximalaya"]
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bytedance.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tencent.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/iqiyi.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youku.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/douyu.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/kuaishou.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ximalaya.list
+
+  - id: cn_common
+    name: "🇨🇳 国内常用"
+    default_target: "🎯 直连服务"
+    mrs_geosite: ["alibaba", "baidu", "jd", "netease", "xiaomi", "huawei", "zhihu", "meituan", "pinduoduo", "sina"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/alibaba.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/baidu.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/jd.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netease.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/xiaomi.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/huawei.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/zhihu.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meituan.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/pinduoduo.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sina.list
+
+  - id: cn_games
+    name: "🎮 国内游戏"
+    default_target: "🎯 直连服务"
+    mrs_geosite: ["category-games@cn", "steam@cn"]
+    sources:
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam@cn.list
 
   - id: speedtest
     name: "📶 网络测速"
@@ -217,20 +293,15 @@ groups:
     mrs_geosite: ["category-public-tracker"]
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.list
+      - https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/trackerslist.list
 
-  # === GFW / 海外非 CN 大盘 ===
+  # ==================== 第 7 层：GFW / 海外社交三源合璧 ====================
   - id: gfw
     name: "🧱 防火长城"
     default_target: "☑️ 节点选择"
-    mrs_geosite: ["gfw"]
+    mrs_geosite: ["gfw", "category-social-media-!cn"]
     sources:
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.list
-
-  # === 国内高频补充域（精简 < 500KB 永不被 subconverter 截断；完整国内大盘由 GEOSITE,cn + GEOIP,CN / cn.mrs 兜底） ===
-  - id: cn_games
-    name: "🎮 国内游戏"
-    default_target: "🎯 直连服务"
-    mrs_geosite: ["category-games@cn", "steam@cn"]
-    sources:
-      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.list
-      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam@cn.list
+      - https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt
+      - https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/gfw.list
+      - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.list
